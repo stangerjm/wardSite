@@ -1,0 +1,43 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+
+<dom-module id="sp-msg">
+  <template>
+    <style>
+      :host {
+        display: block;
+        max-width: 800px;
+        background-color: black;
+        margin: auto;
+        text-align: center;
+        border-radius: 20px;
+        color: white;
+      }
+
+      img{
+        max-width: 50%;
+        margin: auto;
+      }
+
+
+    </style>
+
+    <h2>{{msg.msgTitle}}</h2>
+    <img src="{{msg.imgUrl}}" alt="message-image">
+    <p>{{msg.message}}</p>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'sp-msg',
+
+      properties: {
+        msg:{
+          type: Object
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

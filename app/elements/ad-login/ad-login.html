@@ -1,0 +1,60 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="..\..\bower_components/paper-input/paper-input.html">
+
+<dom-module id="ad-login">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+
+    <firebase-auth
+      id="auth"
+      user="{{user}}"
+      provider="google">
+    </firebase-auth>
+
+    <h1>{{user.email}}</h1>
+
+    <paper-button raised on-tap="login">Login</paper-button>
+    <paper-button raised on-tap="logout">Logout</paper-button>
+    <paper-input id="email" label="Email"></paper-input>
+    <paper-input id="password" label="Password"></paper-input>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'ad-login',
+
+      properties: {
+        loggedin: {
+          type: Boolean,
+          value: false,
+          notify: true
+        }
+      },
+
+      login: function(){
+        var app = this;
+        this.$.auth.signInWithEmailAndPassword(this.$.email.value, this.$.password.value).then(function(){
+            app.loggedin = true;
+            app.$.email.value = "";
+            app.$.password.value = "";
+          }
+        );
+
+
+      },
+
+      logout: function(){
+        return this.$.auth.signOut();
+        this.loggedin = false;
+      }
+
+    });
+  })();
+  </script>
+</dom-module>
